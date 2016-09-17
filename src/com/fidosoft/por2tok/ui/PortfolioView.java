@@ -6,6 +6,7 @@ import org.apache.commons.lang.WordUtils;
 
 import com.fidosoft.por2tok.HeroLabTokenCreator;
 import com.fidosoft.por2tok.ui.callbacks.*;
+import com.fidosoft.por2tok.ui.handlers.OnClickPortfolioRow;
 
 import javafx.scene.control.*;
 import javafx.scene.control.cell.*;
@@ -35,6 +36,7 @@ public class PortfolioView extends TableView {
     getColumns().addAll(getStockColumns());
     getColumns().addAll(getPortfolioColumns());
     setEditable(true);
+    setOnMousePressed(new OnClickPortfolioRow(this));
   }
 
   private Collection<TableColumn> getStockColumns(){

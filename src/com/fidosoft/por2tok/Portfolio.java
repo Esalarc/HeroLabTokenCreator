@@ -23,6 +23,7 @@ public class Portfolio {
   private static final String XP_VERSION_CHECK = "/document/program/version[@version='7.6b']";
   private static final String XP_CHARACTERS = "/document/characters/character";
   private static final String XP_XML_STATBLOCK = "./statblocks/statblock[@format='xml']";
+  private static final String XP_HTML_STATBLOCK = "./statblocks/statblock[@format='html']";
   private static final String XP_IMAGE = "./images/image";
 
   private ArrayList<Character> characters = new ArrayList<>();
@@ -91,6 +92,17 @@ public class Portfolio {
       
       Character character = new CharacterFactory().createCharacter(characterXML);
       extractImage(characterFromFile, character);        
+    
+      characterNode = xpath.getNode(XP_HTML_STATBLOCK, characterFromFile);
+      if (characterNode != null){
+        characterNodeAttributes = characterNode.getAttributes();
+        
+        String characterHTML = readCharacterContents(characterNodeAttributes.getNamedItem("folder"),characterNodeAttributes.getNamedItem("filename"));
+        
+        if (StringUtils.isNotEmpty(characterHTML)){
+          character.setHtmlStatBlock(characterHTML);
+        }
+      }
       characters.add(character);
     }
   }
@@ -101,7 +113,7 @@ public class Portfolio {
 
     ZipArchiveEntry statBlockEntry = zip.getEntry(path + "/" + fileName);
     InputStream in = zip.getInputStream(statBlockEntry);
-    return IOUtils.toString(in);
+    return IOUtils.toString(in, "UTF-8");
   }
 
   private void extractImage(Node characterFromFile, Character character) throws XPathExpressionException, IOException {

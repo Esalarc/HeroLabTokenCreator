@@ -75,6 +75,7 @@ public class Character implements AutoCompleteObject {
   private int vision_lowlight;
   private Set<Weapon> weapons = new HashSet<>();
   private String xpvalue;
+  private String htmlStatBlock;
   
   public void addAbilityBonus(String ability, String bonus){
     abilities.addAbilityBonus(ability, bonus);
@@ -471,6 +472,12 @@ public class Character implements AutoCompleteObject {
         results.add(weapon);
     }
     return results;
+  }
+  public String getHtmlStatBlock() {
+    return htmlStatBlock;
+  }
+  public void setHtmlStatBlock(String htmlStatBlock) {
+    this.htmlStatBlock = htmlStatBlock;
   }
 }
 
