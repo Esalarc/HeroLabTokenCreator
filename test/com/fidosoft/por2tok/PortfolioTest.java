@@ -54,15 +54,20 @@ public class PortfolioTest {
     assertNotNull(sut.getCharacter(0).getImage());
     assertEquals("52d88fcdf5e0075f89fb67b2195d72f7", sut.getCharacter(0).getPortraitMD5());
     Preferences prefs = mock(Preferences.class);
-    when(prefs.get("Properties.name.1", "")).thenReturn("StaticText");
-    when(prefs.get("Properties.definition.1", "")).thenReturn("text");
-    when(prefs.get("Properties.name.2", "")).thenReturn("Blank");
-    when(prefs.get("Properties.definition.2", "")).thenReturn("");
-    when(prefs.get("Properties.name.3", "")).thenReturn("Substitution-Name");
-    when(prefs.get("Properties.definition.3", "")).thenReturn("${character.name}");
+    Settings.loadSettings(null);
+    Settings.getProperties().add(createPropertyDefinition("Static Text", "text"));
+    Settings.getProperties().add(createPropertyDefinition("blank", ""));
+    Settings.getProperties().add(createPropertyDefinition("Substitution-Name", "${character.name}"));
     
-    assertNotNull(sut.getCharacter(0).toToken(prefs));
+    assertNotNull(sut.getCharacter(0).toToken());
   }
+  private PropertyDefinition createPropertyDefinition(String name, String value) {
+    PropertyDefinition result = new PropertyDefinition();
+    result.setPropertyName(name);
+    result.setDefinition(value);
+    return result;
+  }
+
   @Test
   public void testOpen_HappyPathNoStatblocks() throws Exception {
     openFile("/Zanoki7 - No Statblock.por");

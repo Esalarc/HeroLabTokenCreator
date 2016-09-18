@@ -12,7 +12,7 @@ public class TokenTest {
   @Test
   public void testGenerateTokens_happyPath() throws IOException{
     Portfolio por = openFile("/Zanoki7.por");
-    Token.generateTokens(Preferences.userNodeForPackage(HeroLabTokenCreator.class), por);
+    Token.generateTokens(new File("."), por);
   }
   private Portfolio openFile(String fileName) throws IOException{
     String path = null;
