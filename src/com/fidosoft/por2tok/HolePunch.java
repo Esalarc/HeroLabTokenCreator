@@ -32,7 +32,7 @@ public class HolePunch {
     BufferedImage result = new BufferedImage(imageWidth, imageHeight, BufferedImage.TYPE_INT_ARGB);
     Graphics graphics = result.getGraphics();
 
-    Color backgroundColor = new Color(1f, 1f, 1f, 1f);
+    Color backgroundColor = new Color(1f, 1f, 1f, 0f);
     graphics.setColor(backgroundColor);
     graphics.fillRect(0, 0, imageWidth, imageHeight);
     
