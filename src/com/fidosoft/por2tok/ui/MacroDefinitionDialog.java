@@ -7,6 +7,7 @@ import com.fidosoft.por2tok.Character;
 import com.fidosoft.por2tok.MacroDefinition;
 import com.fidosoft.por2tok.MacroDefinition.MacroType;
 
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.geometry.*;
 import javafx.scene.control.*;
@@ -70,6 +71,12 @@ public class MacroDefinitionDialog extends Dialog {
     } catch (IntrospectionException ex) {
       throw new RuntimeException (ex);
     }
+
+    Platform.runLater(new Runnable() {
+      public void run() {
+        nameField.requestFocus();
+      }
+    });
 
     getDialogPane().setContent(contentPane);
   }

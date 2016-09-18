@@ -6,6 +6,7 @@ import java.util.*;
 import com.fidosoft.por2tok.Character;
 import com.fidosoft.por2tok.PropertyDefinition;
 
+import javafx.application.Platform;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 
@@ -21,8 +22,6 @@ public class PropertyDefinitionDialog extends Dialog {
   private void initialize() {
     setTitle("Editing Property Definition");
     setResizable(true);
-    
-    getDialogPane().getButtonTypes().addAll(getButtons());
     
     GridPane pane = new GridPane();      
     pane.setVgap(5);
@@ -42,7 +41,15 @@ public class PropertyDefinitionDialog extends Dialog {
     pane.add(new Label("Property Value"), 0, 1);
     pane.add(valueField, 1, 1);
 
+    getDialogPane().getButtonTypes().addAll(getButtons());
+
     getDialogPane().setContent(pane);
+    
+    Platform.runLater(new Runnable() {
+      public void run() {
+        nameField.requestFocus();
+      }
+    });
   }
   private Collection<ButtonType> getButtons() {
     List<ButtonType> results = new LinkedList<>();
