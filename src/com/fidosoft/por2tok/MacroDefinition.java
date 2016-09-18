@@ -116,20 +116,6 @@ public class MacroDefinition implements SerializableBean{
     this.width = width;
   }
 
-  public void store(Preferences preferences, int index) {
-    if (isValid()){
-      preferences.put("Macros.name." + index, macroName);
-      preferences.put("Macros.definition." + index, definition);
-    } else {
-      preferences.remove("Macros.name." + index);
-      preferences.remove("Macros.definition." + index);
-    }
-  }
-
-  public static List<MacroDefinition> getMacros(Preferences preferences){
-    return BeanSerializer.loadObjectsFromPrefs(MacroDefinition.class, preferences);
-  }
-
   public MacroType getMacroType() {
     return macroType;
   }

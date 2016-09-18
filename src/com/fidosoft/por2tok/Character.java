@@ -446,7 +446,7 @@ public class Character implements AutoCompleteObject {
   }
   private Object parseParameters(Preferences prefs) throws TemplateException, IOException {
     TemplateParser parser = new TemplateParser();
-    List<PropertyDefinition> props = PropertyDefinition.getProperties(prefs);
+    List<PropertyDefinition> props = Settings.getProperties();
     String template = IOUtils.toString(getClass().getResourceAsStream("/templates/property.ftl"));
     StringBuilder sb = new StringBuilder();
     for (PropertyDefinition prop : props){

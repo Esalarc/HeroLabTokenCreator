@@ -19,9 +19,7 @@ public class OnSettingsMacros implements EventHandler<ActionEvent> {
     MacroSettings dialog = new MacroSettings(application.getPreferences());
     Optional<ButtonType> result = dialog.showAndWait();
     if (result.get() == ButtonType.OK){
-      List<MacroDefinition> data = dialog.getMacros();
-      BeanSerializer.writeObjectsToPrefs(data, application.getPreferences(), MacroDefinition.class);
+      Settings.setMacros(dialog.getMacros());
     }
   }
-
 }

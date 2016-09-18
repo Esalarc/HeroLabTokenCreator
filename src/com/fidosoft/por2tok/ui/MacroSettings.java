@@ -4,6 +4,7 @@ import java.util.*;
 import java.util.prefs.Preferences;
 
 import com.fidosoft.por2tok.MacroDefinition;
+import com.fidosoft.por2tok.Settings;
 import com.fidosoft.por2tok.ui.handlers.OnMacrosClick;
 
 import javafx.collections.*;
@@ -15,7 +16,7 @@ public class MacroSettings extends Dialog {
   private ObservableList<MacroDefinition> macros;
   
   public MacroSettings(Preferences preferences) {
-    loadProperties(preferences);
+    loadMacros();
     setTitle("Configure Macros");
     setResizable(true);
     initModality(Modality.APPLICATION_MODAL);
@@ -28,8 +29,8 @@ public class MacroSettings extends Dialog {
     getDialogPane().setContent(tableView);
   }
   
-  private void loadProperties(Preferences preferences) {
-    macros = FXCollections.observableList(MacroDefinition.getMacros(preferences));
+  private void loadMacros() {
+    macros = FXCollections.observableList(Settings.getMacros());
   }
 
   private List<TableColumn> getColumns() {
