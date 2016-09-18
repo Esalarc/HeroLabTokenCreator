@@ -111,6 +111,18 @@ public class Character implements AutoCompleteObject {
   public void addSave(String type, String save){
     saves.put(type, save);
   }
+  public String getFortSave(){
+    String result = saves.get("Fort");
+    return result == null?"":result;
+  }
+  public String getRefSave(){
+    String result = saves.get("Ref");
+    return result == null?"":result;
+  }
+  public String getWillSave(){
+    String result = saves.get("Will");
+    return result == null?"":result;
+  }
   public void addSkill(String skill, String score){
     skills.put(skill, score);
   }

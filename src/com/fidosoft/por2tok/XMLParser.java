@@ -1,7 +1,7 @@
 package com.fidosoft.por2tok;
 
-import java.util.List;
-import java.util.regex.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.xml.xpath.XPathExpressionException;
 
