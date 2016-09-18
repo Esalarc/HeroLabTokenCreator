@@ -25,7 +25,7 @@ public class HeroLabTokenCreator extends Application {
   @Override
   public void start(Stage stage) throws Exception {
     preferences = Preferences.userNodeForPackage(getClass());
-    
+    Settings.loadSettings(new File("./settings.conf"));
     setStage(stage);
     getStage().setTitle("Hero Lab Token Creator");
     layout = new BorderPane();
