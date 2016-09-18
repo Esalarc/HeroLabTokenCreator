@@ -19,8 +19,7 @@ public class OnSettingsProperties implements EventHandler<ActionEvent> {
     PropertySettings dialog = new PropertySettings(application.getPreferences());
     Optional<ButtonType> result = dialog.showAndWait();
     if (result.get() == ButtonType.OK){
-      List<PropertyDefinition> data = dialog.getProperties();
-      BeanSerializer.writeObjectsToPrefs(data, application.getPreferences(), PropertyDefinition.class);
+      Settings.setProperties(dialog.getProperties());
     }
   }
 }

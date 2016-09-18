@@ -46,7 +46,8 @@ public class TokenCreatorMenuBar extends javafx.scene.control.MenuBar implements
     result.add(createMenuItem("_Generate Tokens...", "SHORTCUT+G", null));
     result.addAll(recentFiles());
     result.add(new SeparatorMenuItem());
-    result.add(createMenuItem("_Settings...", "SHORTCUT+S", null));
+    result.add(createMenuItem("_Load Settings...", "SHORTCUT+L", new OnFileLoadSettings(application)));
+    result.add(createMenuItem("_Save Settings...", "SHORTCUT+S", new OnFileSaveSettings(application)));
     result.add(new SeparatorMenuItem());
     result.add(createMenuItem("E_xit...", "SHORTCUT+X", null));
     return result;

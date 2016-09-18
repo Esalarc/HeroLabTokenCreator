@@ -4,6 +4,7 @@ import java.util.*;
 import java.util.prefs.Preferences;
 
 import com.fidosoft.por2tok.PropertyDefinition;
+import com.fidosoft.por2tok.Settings;
 import com.fidosoft.por2tok.ui.handlers.OnPropertiesClick;
 
 import javafx.collections.*;
@@ -15,7 +16,7 @@ public class PropertySettings extends Dialog {
   private ObservableList<PropertyDefinition> properties;
   
   public PropertySettings(Preferences preferences) {
-    loadProperties(preferences);
+    loadProperties();
     setTitle("Comfigure Properties");
     setResizable(true);
     initModality(Modality.APPLICATION_MODAL);
@@ -28,8 +29,8 @@ public class PropertySettings extends Dialog {
     getDialogPane().setContent(tableView);
   }
   
-  private void loadProperties(Preferences preferences) {
-    properties = FXCollections.observableList(PropertyDefinition.getProperties(preferences));
+  private void loadProperties() {
+    properties = FXCollections.observableList(Settings.getProperties());
   }
 
   private List<TableColumn> getColumns() {
