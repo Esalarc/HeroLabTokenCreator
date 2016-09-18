@@ -20,24 +20,26 @@ public class Token {
     this.character = character;
   }
   
-  public static void generateTokens(Preferences prefs, Portfolio portfolio){
+  public static void generateTokens(File directory, Portfolio portfolio){
+    createOutputDirectory(directory);
+    
     int numCharacters = portfolio.getNumCharacters();
     for (int i = 0; i < numCharacters; ++i){
       Character c = portfolio.getCharacter(i);
       if (c.isGenerateToken()){
         Token token = new Token(c);
-        token.generateToken(prefs);
+        token.generateToken(directory);
       }
     }
   }
-  public void generateToken(Preferences prefs){
+  public void generateToken(File directory){
     try{
-      String outputDirectory = createOutputDirectory(prefs);
+      String outputDirectory = directory.getAbsolutePath();
       FileOutputStream out = new FileOutputStream(createFileNameForCharacter(outputDirectory));
       ZipOutputStream zip = new ZipOutputStream(out);
       
       addFileToZip(zip, "properties.xml", tokenProperties());
-      addFileToZip(zip, "content.xml", character.toToken(prefs));
+      addFileToZip(zip, "content.xml", character.toToken());
       addPortraitToZip(zip);
       if (StringUtils.isNotEmpty(character.getTokenMD5())){
         addTokenImageToZip(zip);
@@ -108,14 +110,14 @@ public class Token {
     return parser.parseResource("properties.xml.ftl");
   }
 
-  private String createOutputDirectory(Preferences prefs) {
-    String outputDirectory = prefs.get("settings.tokenFolder", ".");
-    outputDirectory = outputDirectory.replaceAll("[\\/]", File.separator);
-    File outDir = new File(outputDirectory);
-    if (!outDir.exists()){
-      outDir.mkdirs();
+  private static void createOutputDirectory(File directory) {
+    if (directory == null || !directory.isDirectory()){
+      throw new IllegalArgumentException("Bad directory");
     }
-    return outputDirectory;
+    directory.mkdirs();
+    if (!directory.exists()){
+      throw new IllegalArgumentException("Bad directory");
+    }
   }
 
   private String createFileNameForCharacter(String outputDirectory) {

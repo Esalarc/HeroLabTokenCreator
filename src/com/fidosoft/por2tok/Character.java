@@ -435,16 +435,16 @@ public class Character implements AutoCompleteObject {
     return null;
   }
 
-  public String toToken(Preferences prefs) throws TemplateException, IOException{
+  public String toToken() throws TemplateException, IOException{
     TemplateParser parser = new TemplateParser();
     parser.setObject("character", this);
-    parser.setObject("properties", parseParameters(prefs));
+    parser.setObject("properties", parseParameters());
     parser.setObject("macros", "");
     
     String template = parser.parseResource("token.ftl");
     return parser.parseTemplate(template);
   }
-  private Object parseParameters(Preferences prefs) throws TemplateException, IOException {
+  private Object parseParameters() throws TemplateException, IOException {
     TemplateParser parser = new TemplateParser();
     List<PropertyDefinition> props = Settings.getProperties();
     String template = IOUtils.toString(getClass().getResourceAsStream("/templates/property.ftl"));
