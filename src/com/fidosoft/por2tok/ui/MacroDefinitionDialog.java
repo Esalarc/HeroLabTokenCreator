@@ -16,6 +16,11 @@ import javafx.scene.layout.GridPane;
 
 public class MacroDefinitionDialog extends Dialog {
   private GridPane contentPane;
+  
+  private static final String[] COLORS = {"black","blue", "cyan", "gray", "magenta", "red", "white", "yellow", 
+                                          "darkgray", "green", "lightgray", "orange", "pink", "aqua", "fuchsia",
+                                          "lime", "maroon", "navy", "olive", "purple", "silver", "teal", 
+                                          "gray25", "gray50", "gray75"};
 
   private ComboBox<MacroType> macroTypeField;
   private TextField nameField;
@@ -30,9 +35,8 @@ public class MacroDefinitionDialog extends Dialog {
   private CheckBox includeLabelField;
   private TextField toolTipField;
 
-  private TextField buttonBackgroundColor;
-
-  private TextField buttonForegroundColor;
+  private ComboBox<String> buttonBackgroundColor;
+  private ComboBox<String> buttonForegroundColor;
   
   public MacroDefinitionDialog(MacroDefinition def) {
     initialize(def.getMacroName());    
@@ -60,8 +64,11 @@ public class MacroDefinitionDialog extends Dialog {
     hotKeyField = addInput("Hot Key", new TextField(), row++);
     includeLabelField = addInput("Include Label", new CheckBox(), row++);
     toolTipField = addInput("Tool Tip", new TextField(), row++);
-    buttonBackgroundColor = addInput("Button Background", new TextField(), row++);
-    buttonForegroundColor = addInput("Button Foreground", new TextField(), row++);
+    buttonBackgroundColor = addInput("Button Background", new ComboBox<String>(), row++);
+    buttonForegroundColor = addInput("Button Foreground", new ComboBox<String>(), row++);
+    
+    buttonBackgroundColor.setItems(FXCollections.observableArrayList(COLORS));
+    buttonForegroundColor.setItems(FXCollections.observableArrayList(COLORS));
     
     macroTypeField.setItems(FXCollections.observableArrayList(MacroType.values()));
     buttonWidthField.setTextFormatter(new TextFormatter<Change>(new NumericFormatter()));
@@ -114,8 +121,8 @@ public class MacroDefinitionDialog extends Dialog {
       target.setHotKey(hotKeyField.getText());
       target.setIncludeLabel(includeLabelField.isSelected());
       target.setToolTip(toolTipField.getText());
-      target.setButtonBackgroundColor(buttonBackgroundColor.getText());
-      target.setButtonTextColor(buttonForegroundColor.getText());
+      target.setButtonBackgroundColor(buttonBackgroundColor.getValue());
+      target.setButtonTextColor(buttonForegroundColor.getValue());
     } else {
       nameField.setText(target.getMacroName());
       valueField.setText(target.getDefinition());
@@ -129,8 +136,8 @@ public class MacroDefinitionDialog extends Dialog {
       hotKeyField.setText(target.getHotKey());
       includeLabelField.setSelected(target.isIncludeLabel());
       toolTipField.setText(target.getToolTip());
-      buttonBackgroundColor.setText(target.getButtonBackgroundColor());
-      buttonForegroundColor.setText(target.getButtonTextColor());
+      buttonBackgroundColor.setValue(target.getButtonBackgroundColor());
+      buttonForegroundColor.setValue(target.getButtonTextColor());
     }
   }
 }
