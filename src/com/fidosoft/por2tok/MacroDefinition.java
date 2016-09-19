@@ -5,6 +5,8 @@ import java.util.prefs.Preferences;
 
 import org.apache.commons.lang.StringUtils;
 
+import com.fidosoft.por2tok.ui.ButtonTableCellFactory;
+
 public class MacroDefinition implements SerializableBean{
   private MacroType macroType;
   private boolean allowPlayerEdits;
@@ -30,6 +32,9 @@ public class MacroDefinition implements SerializableBean{
     allowPlayerEdits = true;  
     width = 40;
     includeLabel = false;
+    hotKey = "None";
+    buttonBackgroundColor = "default";
+    buttonTextColor = "default";
   }
 
   public String getButtonBackgroundColor() {

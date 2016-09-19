@@ -76,6 +76,7 @@ public class Character implements AutoCompleteObject {
   private Set<Weapon> weapons = new HashSet<>();
   private String xpvalue;
   private String htmlStatBlock;
+  private String cr;
   
   public void addAbilityBonus(String ability, String bonus){
     abilities.addAbilityBonus(ability, bonus);
@@ -490,6 +491,12 @@ public class Character implements AutoCompleteObject {
   }
   public void setHtmlStatBlock(String htmlStatBlock) {
     this.htmlStatBlock = htmlStatBlock;
+  }
+  public void setCR(String cr) {
+    this.cr = cr;
+  }
+  public String getCR(){
+    return cr;
   }
 }
 
