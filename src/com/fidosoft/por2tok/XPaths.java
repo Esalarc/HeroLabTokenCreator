@@ -181,6 +181,8 @@ public class XPaths {
   public String MONEY_GP;
   public String MONEY_PP;
   public String MONEY;
+  public String BASE_CHALLENGE;
+  public String BASE_CHALLENGE_VALUE;
   public String BASE_XPAWARD;
   public String BASE_PERSONAL_GENDER;
   public String BASE_PERSONAL;

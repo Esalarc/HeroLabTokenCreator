@@ -270,6 +270,7 @@ public class XMLParser {
     }
   }
   private void parseBase() throws XPathExpressionException {
+    target.setCR(xml.find(xpaths.BASE_CHALLENGE).get(xpaths.BASE_CHALLENGE_VALUE));
     target.setRole(xml.get(xpaths.BASE_ROLE));
     target.setName(xml.get(xpaths.BASE_CHARACTER_NAME));
     target.setTokenName(xml.get(xpaths.BASE_CHARACTER_NAME) + ".token");
