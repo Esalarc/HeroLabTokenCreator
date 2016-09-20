@@ -42,6 +42,7 @@ public class MacroDefinitionDialog extends Dialog {
   private ComboBox<String> hotKeyField;
   private CheckBox includeLabelField;
   private TextField toolTipField;
+  private TextField sortByField;
 
   private ComboBox<String> buttonBackgroundColor;
   private ComboBox<String> buttonForegroundColor;
@@ -67,6 +68,7 @@ public class MacroDefinitionDialog extends Dialog {
     applyToTokensField = addInput("Apply to tookens?", new CheckBox(), row++);
     autoExecuteField = addInput("Auto execute?", new CheckBox(), row++);
     buttonGroupField = addInput("Button Group", new TextField(), row++);
+    sortByField = addInput("Order in Group", new TextField(), row++);
     buttonLabelField = addInput("Button Label", new TextField(), row++);
     buttonWidthField = addInput("Button Width", new TextField(), row++);
     hotKeyField = addInput("Hot Key", new ComboBox<String>(), row++);
@@ -81,6 +83,7 @@ public class MacroDefinitionDialog extends Dialog {
     
     macroTypeField.setItems(FXCollections.observableArrayList(MacroType.values()));
     buttonWidthField.setTextFormatter(new TextFormatter<Change>(new NumericFormatter()));
+    sortByField.setTextFormatter(new TextFormatter<Change>(new NumericFormatter()));
     try{
       AutoCompleteDecorator autocomplete = new AutoCompleteDecorator((TextArea)valueField);
       autocomplete.initializeEntries(new Character());
@@ -132,6 +135,7 @@ public class MacroDefinitionDialog extends Dialog {
       target.setToolTip(toolTipField.getText());
       target.setButtonBackgroundColor(buttonBackgroundColor.getValue());
       target.setButtonTextColor(buttonForegroundColor.getValue());
+      target.setSortBy(Integer.valueOf(sortByField.getText()));
     } else {
       nameField.setText(target.getMacroName());
       valueField.setText(target.getDefinition());
@@ -147,6 +151,7 @@ public class MacroDefinitionDialog extends Dialog {
       toolTipField.setText(target.getToolTip());
       buttonBackgroundColor.setValue(target.getButtonBackgroundColor());
       buttonForegroundColor.setValue(target.getButtonTextColor());
+      sortByField.setText(String.valueOf(target.getSortBy()));
     }
   }
 }

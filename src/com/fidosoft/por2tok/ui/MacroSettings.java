@@ -37,7 +37,8 @@ public class MacroSettings extends Dialog {
     List<TableColumn> columns = new LinkedList<>();
     columns.add(createColumn("Name", "macroName"));
     columns.add(createColumn("Applies To", "macroType"));
-    columns.add(createColumn("Group", "group"));
+    columns.add(createColumn("Group", "buttonGoup"));
+    columns.add(createColumn("Sort By", "sortBy"));
     columns.add(createColumn("Hot Key", "hotKey"));
 
     return columns;

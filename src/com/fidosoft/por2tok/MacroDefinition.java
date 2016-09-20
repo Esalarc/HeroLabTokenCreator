@@ -12,6 +12,7 @@ public class MacroDefinition implements SerializableBean{
   private boolean allowPlayerEdits;
   private boolean applyToTokens;
   private boolean autoExecute;
+  private int sortBy;
   private String buttonBackgroundColor;
   private String buttonGoup;
   private String buttonLabel;
@@ -35,6 +36,7 @@ public class MacroDefinition implements SerializableBean{
     hotKey = "None";
     buttonBackgroundColor = "default";
     buttonTextColor = "default";
+    sortBy = 1;
   }
 
   public String getButtonBackgroundColor() {
@@ -127,6 +129,14 @@ public class MacroDefinition implements SerializableBean{
 
   public void setMacroType(MacroType macroType) {
     this.macroType = macroType;
+  }
+
+  public int getSortBy() {
+    return sortBy;
+  }
+
+  public void setSortBy(int sortBy) {
+    this.sortBy = sortBy;
   }
 
   public enum MacroType{
