@@ -9,18 +9,18 @@ public class Abilities {
   public Abilities(){
   }
   
-  public String getStr(){return abilityScores.get("str");}
-  public String getDex(){return abilityScores.get("dex");}
-  public String getCon(){return abilityScores.get("con");}
-  public String getInt(){return abilityScores.get("int");}
-  public String getWis(){return abilityScores.get("wis");}
-  public String getCha(){return abilityScores.get("cha");}
-  public String getStrBonus(){return abilityBonuses.get("str");}
-  public String getDexBonus(){return abilityBonuses.get("dex");}
-  public String getConBonus(){return abilityBonuses.get("con");}
-  public String getIntBonus(){return abilityBonuses.get("int");}
-  public String getWisBonus(){return abilityBonuses.get("wis");}
-  public String getChaBonus(){return abilityBonuses.get("cha");}
+  public String getStr(){return abilityScores.get("Strength");}
+  public String getDex(){return abilityScores.get("Dexterity");}
+  public String getCon(){return abilityScores.get("Constitution");}
+  public String getInt(){return abilityScores.get("Intelligence");}
+  public String getWis(){return abilityScores.get("Wisdom");}
+  public String getCha(){return abilityScores.get("Charisma");}
+  public String getStrBonus(){return abilityBonuses.get("Strength");}
+  public String getDexBonus(){return abilityBonuses.get("Dexterity");}
+  public String getConBonus(){return abilityBonuses.get("Constitution");}
+  public String getIntBonus(){return abilityBonuses.get("Intelligence");}
+  public String getWisBonus(){return abilityBonuses.get("Wisdom");}
+  public String getChaBonus(){return abilityBonuses.get("Charisma");}
   
   public void addAbilityBonus(String ability, String bonus){
     abilityBonuses.put(ability, bonus);

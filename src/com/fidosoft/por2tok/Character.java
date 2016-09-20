@@ -10,6 +10,7 @@ import java.util.prefs.Preferences;
 import javax.imageio.ImageIO;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang.StringEscapeUtils;
 
 import freemarker.template.TemplateException;
 
@@ -452,12 +453,27 @@ public class Character implements AutoCompleteObject {
     TemplateParser parser = new TemplateParser();
     parser.setObject("character", this);
     parser.setObject("properties", parseParameters());
-    parser.setObject("macros", "");
+    parser.setObject("macros", parseMacros());
     
     String template = parser.parseResource("token.ftl");
     return parser.parseTemplate(template);
   }
-  private Object parseParameters() throws TemplateException, IOException {
+  private String parseMacros() throws IOException, TemplateException {
+    TemplateParser parser = new TemplateParser();
+    List<MacroDefinition> macros = Settings.getMacros();
+    String template = IOUtils.toString(getClass().getResourceAsStream("/templates/macro.ftl"));
+    StringBuilder sb = new StringBuilder();
+    int index = 1;
+    for (MacroDefinition def : macros){
+      if (def.isValid() && def.getMacroType() == MacroDefinition.MacroType.CHARACTER){
+        parser.setObject("macroDef", def);
+        parser.setObject("macroIndex", String.valueOf(index++));
+        sb.append(parser.parseTemplate(template)).append("\n");
+      }
+    }
+    return sb.toString();
+   }
+  private String parseParameters() throws TemplateException, IOException {
     TemplateParser parser = new TemplateParser();
     List<PropertyDefinition> props = Settings.getProperties();
     String template = IOUtils.toString(getClass().getResourceAsStream("/templates/property.ftl"));
