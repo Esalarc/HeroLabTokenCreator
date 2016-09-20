@@ -2,6 +2,7 @@ package com.fidosoft.por2tok.ui.handlers;
 
 import java.awt.image.BufferedImage;
 import java.io.*;
+import java.util.prefs.Preferences;
 
 import javax.imageio.ImageIO;
 
@@ -23,12 +24,17 @@ public class OnClickPortraitBrowse implements EventHandler<ActionEvent>{
   @Override
   public void handle(ActionEvent event) {
     FileChooser fileChooser = new FileChooser();
+    Preferences preferences = Preferences.userNodeForPackage(HeroLabTokenCreator.class);
+    String initialDir = preferences.get(SELECT_IMAGE_FOLDER, System.getProperty("user.home"));
+    
     fileChooser.setTitle("Select Portrait Image");
-//    fileChooser.setInitialDirectory(new File(application.getPreferences().get(SELECT_IMAGE_FOLDER, System.getProperty("user.home"))));
+    fileChooser.setInitialDirectory(new File(initialDir));
     
     File selected = fileChooser.showOpenDialog(application.getStage());
-    openFile(selected);
-    application.getPreferences().put(SELECT_IMAGE_FOLDER, selected.getParent());
+    if (selected != null){
+      preferences.put(SELECT_IMAGE_FOLDER, selected.getParent());
+      openFile(selected);
+    }
   }
   protected void openFile(File selected) {
     if (selected != null && selected.exists()){

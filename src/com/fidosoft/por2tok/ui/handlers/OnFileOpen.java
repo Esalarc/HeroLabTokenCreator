@@ -1,6 +1,7 @@
 package com.fidosoft.por2tok.ui.handlers;
 
 import java.io.File;
+import java.util.prefs.Preferences;
 
 import com.fidosoft.por2tok.HeroLabTokenCreator;
 import com.fidosoft.por2tok.ui.PortfolioView;
@@ -20,14 +21,20 @@ public class OnFileOpen implements EventHandler<ActionEvent>{
   }
   @Override
   public void handle(ActionEvent event) {
+    Preferences preferences = Preferences.userNodeForPackage(HeroLabTokenCreator.class);
+    String initialDir = preferences.get("file.open.initialDir", System.getProperty("user.home"));
+    
     FileChooser fileChooser = new FileChooser();
     fileChooser.setTitle("Open Portfolio");
     fileChooser.getExtensionFilters().addAll(ALL_FILES, PORTFOLIO_FILES);
     fileChooser.setSelectedExtensionFilter(PORTFOLIO_FILES);
-    File startIn = new File(System.getProperty("user.home"));
-    fileChooser.setInitialDirectory(startIn);
+    fileChooser.setInitialDirectory(new File(initialDir));
+
     File selected = fileChooser.showOpenDialog(application.getStage());
-    openFile(selected);
+    if (selected != null){
+      preferences.put("file.open.initialDir", selected.getParent());
+      openFile(selected);
+    }
   }
   protected void openFile(File selected) {
     if (selected != null && selected.exists()){

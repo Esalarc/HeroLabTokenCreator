@@ -2,6 +2,7 @@ package com.fidosoft.por2tok.ui.handlers;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.prefs.Preferences;
 
 import com.fidosoft.por2tok.HeroLabTokenCreator;
 import com.fidosoft.por2tok.Settings;
@@ -22,14 +23,17 @@ public class OnFileSaveSettings implements EventHandler<ActionEvent>{
   @Override
   public void handle(ActionEvent event) {
     FileChooser fileChooser = new FileChooser();
+    Preferences preferences = Preferences.userNodeForPackage(HeroLabTokenCreator.class);
+    String initialDir = preferences.get("file.settings.initialDir", System.getProperty("user.home"));
+
     fileChooser.setTitle("Select settings file");
     fileChooser.getExtensionFilters().addAll(ALL_FILES, SETTINGS_FILES);
     fileChooser.setSelectedExtensionFilter(SETTINGS_FILES);
-    File startIn = new File(System.getProperty("user.home"));
-    fileChooser.setInitialDirectory(startIn);
+    fileChooser.setInitialDirectory(new File(initialDir));
     
     File selected = fileChooser.showSaveDialog(application.getStage());
     if (selected != null){
+      preferences.put("file.settings.initialDir", selected.getParent());
       try {
         Settings.saveSettings(selected);
       } catch (IOException e) {
