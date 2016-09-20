@@ -209,6 +209,8 @@ public class HeroLabV76b extends XPaths {
     this.MONEY_PP = "@pp";
     this.MONEY = "money";
         
+    this.BASE_CHALLENGE = "challengerating";
+    this.BASE_CHALLENGE_VALUE = "@value";
     this.BASE_XPAWARD = "xpaward";
     this.BASE_XPAWARD_VALUE = "@value";
     this.BASE_PERSONAL_GENDER = "@gender";
